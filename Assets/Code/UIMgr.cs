@@ -35,6 +35,7 @@ public class UIMgr : MonoBehaviour {
         m_buyAll.onClick.AddListener(() => BtnBuyAll());
         m_sell.onClick.AddListener(() => BtnSellOnce());
         m_sellAll.onClick.AddListener(() => BtnSellAll());
+
     }
 	
 	// Update is called once per frame

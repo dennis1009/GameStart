@@ -7,7 +7,7 @@ public class DataMgr  {
     public int curprice ;
     public int curmoney = 50000 ;
     public int haveCount;
-    public float avgPrice;
+    public int avgPrice;
     private static DataMgr dataMgr;
     
     public static DataMgr Instance()
@@ -45,14 +45,14 @@ public class DataMgr  {
         UIMgr uiMgr = Object.FindObjectOfType<UIMgr>();
         int nowbuyCount = isall ? curmoney / curprice : 1;
         int nowbuyPrice = curprice;
+        int oldcount = haveCount;
         haveCount += nowbuyCount;
         curmoney -= nowbuyCount * nowbuyPrice;
-        avgPrice = avgPrice +((nowbuyCount * nowbuyPrice) / nowbuyPrice);//todo 平均价格不对
+        avgPrice = (avgPrice * oldcount +((nowbuyCount * nowbuyPrice) / nowbuyCount))/haveCount;
 
         uiMgr.m_count.text = haveCount.ToString();
         uiMgr.m_money.text = curmoney.ToString();
         uiMgr.m_avg.text = avgPrice.ToString();
-        Debug.LogError(avgPrice);
     }
 
     public void SellAction(bool isall)
@@ -71,6 +71,5 @@ public class DataMgr  {
         uiMgr.m_count.text = haveCount.ToString();
         uiMgr.m_money.text = curmoney.ToString();
         uiMgr.m_avg.text = avgPrice.ToString();
-        Debug.LogError(avgPrice);
     }
 }

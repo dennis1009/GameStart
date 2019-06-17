@@ -10,10 +10,12 @@ public class LineMgr : MonoBehaviour {
     static float oldy = 0;
     public static float timer = 0.0f;
     public static float timegap = 2.0f;
+    public static Camera m_camera;
     int maxPoint = 50;
 	// Use this for initialization
 	void Start ()
     {
+        m_camera = FindObjectOfType<Camera>();
         DataMgr.Instance().Init();
         lineRenderer = GetComponent<LineRenderer>();
         PointList.Add(Vector3.zero);
@@ -28,6 +30,7 @@ public class LineMgr : MonoBehaviour {
             DataMgr.Instance().CalcPrice();
             CalcPoint();
             lineRenderer.SetPositions(PointArray);
+            MoveCamera();
             timer = 0;
             UIMgr uiMgr = FindObjectOfType<UIMgr>();
             uiMgr.m_price.text = DataMgr.Instance().curprice.ToString();
@@ -61,6 +64,13 @@ public class LineMgr : MonoBehaviour {
         }
         oldy = n_point.y;
         CalcList(n_point);
+    }
 
+    public static void MoveCamera()
+    {
+        Vector3 curPoint = PointArray[PointArray.Length - 1];
+        curPoint.z -= 500;
+        curPoint.y -= curPoint.y/2;
+        m_camera.transform.position = curPoint;
     }
 }
