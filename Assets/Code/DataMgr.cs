@@ -48,7 +48,7 @@ public class DataMgr  {
         int oldcount = haveCount;
         haveCount += nowbuyCount;
         curmoney -= nowbuyCount * nowbuyPrice;
-        avgPrice = (avgPrice * oldcount +((nowbuyCount * nowbuyPrice) / nowbuyCount))/haveCount;
+        avgPrice = (avgPrice * oldcount + nowbuyCount * nowbuyPrice )/haveCount;
 
         uiMgr.m_count.text = haveCount.ToString();
         uiMgr.m_money.text = curmoney.ToString();
@@ -70,6 +70,6 @@ public class DataMgr  {
 
         uiMgr.m_count.text = haveCount.ToString();
         uiMgr.m_money.text = curmoney.ToString();
-        uiMgr.m_avg.text = avgPrice.ToString();
+        uiMgr.m_avg.text = haveCount == 0 ? "0" :avgPrice.ToString();
     }
 }

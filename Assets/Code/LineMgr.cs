@@ -30,7 +30,7 @@ public class LineMgr : MonoBehaviour {
             DataMgr.Instance().CalcPrice();
             CalcPoint();
             lineRenderer.SetPositions(PointArray);
-            MoveCamera();
+/*            MoveCamera();*/
             timer = 0;
             UIMgr uiMgr = FindObjectOfType<UIMgr>();
             uiMgr.m_price.text = DataMgr.Instance().curprice.ToString();
@@ -63,14 +63,15 @@ public class LineMgr : MonoBehaviour {
             lineRenderer.material.color = Color.red;
         }
         oldy = n_point.y;
+/*        n_point.z = -100;*/
         CalcList(n_point);
     }
 
-    public static void MoveCamera()
-    {
-        Vector3 curPoint = PointArray[PointArray.Length - 1];
-        curPoint.z -= 500;
-        curPoint.y -= curPoint.y/2;
-        m_camera.transform.position = curPoint;
-    }
+//     public static void MoveCamera()
+//     {
+//         Vector3 curPoint = PointArray[PointArray.Length - 1];
+//         curPoint.z -= 500;
+//         curPoint.y -= curPoint.y/2;
+//         m_camera.transform.position = curPoint;
+//     }
 }
