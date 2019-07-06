@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DataMgr  {
     int startprice = 0;
-    public int curprice ;
-    public int curmoney = 50000 ;
+    public float curprice ;
+    public float curmoney = 50000.00f ;
     public int haveCount;
-    public int avgPrice;
+    public float avgPrice;
     private static DataMgr dataMgr;
     
     public static DataMgr Instance()
@@ -28,7 +28,7 @@ public class DataMgr  {
 
     public void CalcPrice()
     {
-        curprice += Random.Range(-50, 50);
+        curprice += Random.Range((float)(curprice * -0.5), (float)(curprice * 0.5));
         if (curprice<0)
         {
             curprice = 0;
@@ -43,16 +43,16 @@ public class DataMgr  {
             return;
         }
         UIMgr uiMgr = Object.FindObjectOfType<UIMgr>();
-        int nowbuyCount = isall ? curmoney / curprice : 1;
-        int nowbuyPrice = curprice;
+        int nowbuyCount = isall ? (int)(curmoney / curprice) : 1;
+        float nowbuyPrice = curprice;
         int oldcount = haveCount;
         haveCount += nowbuyCount;
         curmoney -= nowbuyCount * nowbuyPrice;
         avgPrice = (avgPrice * oldcount + nowbuyCount * nowbuyPrice )/haveCount;
 
         uiMgr.m_count.text = haveCount.ToString();
-        uiMgr.m_money.text = curmoney.ToString();
-        uiMgr.m_avg.text = avgPrice.ToString();
+        uiMgr.m_money.text = curmoney.ToString("f2");
+        uiMgr.m_avg.text = avgPrice.ToString("f2");
     }
 
     public void SellAction(bool isall)
@@ -64,12 +64,12 @@ public class DataMgr  {
         }
         UIMgr uiMgr = Object.FindObjectOfType<UIMgr>();
         int nowsellCount = isall ? haveCount : 1;
-        int nowsellPrice = curprice;
+        float nowsellPrice = curprice;
         haveCount -= nowsellCount;
         curmoney += nowsellCount * nowsellPrice;
 
         uiMgr.m_count.text = haveCount.ToString();
-        uiMgr.m_money.text = curmoney.ToString();
-        uiMgr.m_avg.text = haveCount == 0 ? "0" :avgPrice.ToString();
+        uiMgr.m_money.text = curmoney.ToString("f2");
+        uiMgr.m_avg.text = haveCount == 0 ? "0" : avgPrice.ToString("f2");
     }
 }

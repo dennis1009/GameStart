@@ -21,8 +21,8 @@ public class UIMgr : MonoBehaviour {
         m_avg = PriceLabel.transform.Find("avgPrice/avgPriceValue").GetComponent<Text>();
         m_count = PriceLabel.transform.Find("haveCount/haveCountValue").GetComponent<Text>();
 
-        m_price.text = DataMgr.Instance().curprice.ToString();
-        m_money.text = DataMgr.Instance().curmoney.ToString();
+        m_price.text = DataMgr.Instance().curprice.ToString("f2");
+        m_money.text = DataMgr.Instance().curmoney.ToString("f2");
         m_avg.text = "0";
         m_count.text = "0";             
 

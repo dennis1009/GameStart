@@ -33,7 +33,7 @@ public class LineMgr : MonoBehaviour {
 /*            MoveCamera();*/
             timer = 0;
             UIMgr uiMgr = FindObjectOfType<UIMgr>();
-            uiMgr.m_price.text = DataMgr.Instance().curprice.ToString();
+            uiMgr.m_price.text = DataMgr.Instance().curprice.ToString("f2");
         }
 
 
