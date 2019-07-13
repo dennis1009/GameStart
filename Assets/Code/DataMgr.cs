@@ -23,8 +23,9 @@ public class DataMgr  {
 
         startprice = Random.Range(100, 200);
         curprice = startprice;
+        curmoney = 50000.00f;
 
-	}
+    }
 
     public void CalcPrice()
     {
