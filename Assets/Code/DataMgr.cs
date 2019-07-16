@@ -20,7 +20,8 @@ public class DataMgr  {
     }
     public void Init ()
     {
-
+        LineMgr.PointList.Add(Vector3.zero);
+        LineMgr.PointList.Add(Vector3.forward);
         startprice = Random.Range(100, 200);
         curprice = startprice;
         curmoney = 50000.00f;

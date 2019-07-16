@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LineMgr : MonoBehaviour {
     public static LineRenderer lineRenderer;
-    static List<Vector3> PointList = new List<Vector3>();
+    public static List<Vector3> PointList = new List<Vector3>();
     public static Vector3[] PointArray;
     static float oldx = 0;
     static float oldy = 0;
@@ -15,11 +15,8 @@ public class LineMgr : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        m_camera = FindObjectOfType<Camera>();
-        DataMgr.Instance().Init();
-        lineRenderer = GetComponent<LineRenderer>();
-        PointList.Add(Vector3.zero);
-        PointList.Add(Vector3.forward);
+        m_camera = FindObjectOfType<Camera>();//Todo 相机移动找时间优化了
+        lineRenderer = GetComponent<LineRenderer>();//Todo 此处初始化 LineRenderer 太他妈蠢了，想想重构吧
     }
 	
 	// Update is called once per frame
