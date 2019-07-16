@@ -40,6 +40,7 @@ public class DataMgr  {
     {
         if (curprice <= 0)//0元保护
         {
+            UIMgr.ChangeTips("0元禁止出售或购买？");
             Debug.LogError("0元禁止出售或购买");
             return;
         }
@@ -60,14 +61,19 @@ public class DataMgr  {
     {
         if (haveCount <= 0)
         {
+            UIMgr.ChangeTips("你都没有卖个锤子呢？");
             Debug.LogError("你都没有卖个锤子呢？");
             return;
         }
         if (curprice <= 0)//0元保护
         {
+            UIMgr.ChangeTips("0元禁止出售或购买？");
             Debug.LogError("0元禁止出售或购买");
             return;
         }
+        string m_tips = isall ? "全卖了割肉！" : "卖一次";
+        UIMgr.ChangeTips(m_tips);
+
         UIMgr uiMgr = Object.FindObjectOfType<UIMgr>();
         int nowsellCount = isall ? haveCount : 1;
         float nowsellPrice = curprice;

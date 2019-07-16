@@ -13,8 +13,9 @@ public class UIMgr : MonoBehaviour {
     public Text m_money;
     public Text m_avg;
     public Text m_count;
+    public static Text m_tips;
     public CanvasGroup m_mask;
-
+    private float uiTimer = 0.0f;
     // Use this for initialization
     void Start ()
     {
@@ -26,6 +27,7 @@ public class UIMgr : MonoBehaviour {
         m_money = PriceLabel.transform.Find("curMoney/curMoneyValue").GetComponent<Text>();
         m_avg = PriceLabel.transform.Find("avgPrice/avgPriceValue").GetComponent<Text>();
         m_count = PriceLabel.transform.Find("haveCount/haveCountValue").GetComponent<Text>();
+        m_tips = PriceLabel.transform.Find("Tips").GetComponent<Text>();
 
         m_price.text = DataMgr.Instance().curprice.ToString("f2");
         m_money.text = DataMgr.Instance().curmoney.ToString("f2");
@@ -43,6 +45,7 @@ public class UIMgr : MonoBehaviour {
         Button m_close = SettingCanvas.transform.Find("SettingPanel/CloseBtn").GetComponent<Button>();
 
         SettingCanvas.gameObject.SetActive(false);
+        m_tips.gameObject.SetActive(false);
 
         m_buy.onClick.AddListener(() => BtnBuyOnce());
         m_buyAll.onClick.AddListener(() => BtnBuyAll());
@@ -55,23 +58,43 @@ public class UIMgr : MonoBehaviour {
 
 
     }
-	
+    private void Update()
+    {
+
+        uiTimer += Time.deltaTime;
+        if (uiTimer > 2.0f)
+        {
+            if(m_tips.gameObject.activeSelf == true)
+                m_tips.gameObject.SetActive(false);
+            uiTimer = 0.0f;
+        }
+
+    }
+
+    public static void ChangeTips(string tips)
+    {
+        m_tips.text = tips;
+        m_tips.gameObject.SetActive(true);
+    }
+
     void SwitchSettingPanel(bool open)
     {
         SettingCanvas.gameObject.SetActive(open);
         m_mask.blocksRaycasts = !open  ;
     }
-	// Update is called once per frame
+
     void BtnBuyOnce()
     {
         bool isall = false;
         DataMgr.Instance().BuyAction(isall);
+        ChangeTips("买一次");
         Debug.LogError("买一次");
     }
     void BtnBuyAll()
     {
         bool isall = true;
         DataMgr.Instance().BuyAction(isall);
+        ChangeTips("梭哈了！");
         Debug.LogError("全买了！");
     }
     void BtnSellOnce()
