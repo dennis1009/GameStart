@@ -58,6 +58,11 @@ public class DataMgr  {
 
     public void SellAction(bool isall)
     {
+        if (haveCount <= 0)
+        {
+            Debug.LogError("你都没有卖个锤子呢？");
+            return;
+        }
         if (curprice <= 0)//0元保护
         {
             Debug.LogError("0元禁止出售或购买");
