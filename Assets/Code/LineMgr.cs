@@ -53,11 +53,11 @@ public class LineMgr : MonoBehaviour {
         n_point.y = dataMgr.curprice;
         if (n_point.y < oldy)
         {
-            lineRenderer.material.color = Color.green;
+            lineRenderer.sharedMaterial.color = Color.green;
         }
         else
         {
-            lineRenderer.material.color = Color.red;
+            lineRenderer.sharedMaterial.color = Color.red;
         }
         oldy = n_point.y;
 /*        n_point.z = -100;*/
